@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import SvgMap from "../cmpts/SvgMap";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import SvgMap from '../cmpts/SvgMap';
 
 const MainSector = styled.div`
   width: 100vw;
@@ -20,12 +20,12 @@ const MainSector = styled.div`
 
 const MapSector = styled.div`
   display: inline-block;
-  width: 98.4%;
-  height: 37%;
+  width: 1384px;
+  height: 360px;
   margin-top: 100px;
   margin-left: 5px;
   background-color: white;
-  background-image: url("/map.png");
+  background-image: url('/map.png');
 `;
 
 const MainContainer = () => {
@@ -64,25 +64,6 @@ const MainContainer = () => {
       <MapSector>
         <SvgMap percent1={percent1} percent2={percent2} />
       </MapSector>
-      <p>
-        최대 굴진 거리 :
-        <input
-          onChange={onChange}
-          name="maxLength1"
-          value={Values.maxLength1 >= 0 ? Values.maxLength1 : 0}
-        />
-        m
-      </p>
-      <p>
-        현재 굴진 거리 :
-        <input
-          onChange={onChange}
-          name="currentLength1"
-          value={Values.currentLength1 >= 0 ? Values.currentLength1 : 0}
-        />
-        m
-      </p>
-      <p>굴진 퍼센트 : {`${percent1}`} %</p>
       <hr />
       <p>
         최대 굴진 거리 :

@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useMemo } from "react";
-import styled, { css } from "styled-components";
+import React, { useCallback, useEffect, useMemo } from 'react';
+import styled, { css } from 'styled-components';
 
 // const MovingPathContainer = styled.div`
 //   /* width: 100%;
@@ -69,7 +69,7 @@ const MovingPath = ({ pathOption, percent }) => {
     // svg path의 총 길이를 알아내기
     console.log(
       `${id} path 총 길이 >`,
-      document.getElementById(`${id}-main-path`).getTotalLength()
+      document.getElementById(`${id}-main-path`).getTotalLength(),
     );
   });
 
@@ -118,19 +118,20 @@ const MovingPath = ({ pathOption, percent }) => {
     // console.log(percentV);
     // console.log(multiplyV);
     // console.log(dasharrayV - percentV * multiplyV);
-    if (direction === "reverse") {
-      console.log("reverse");
+    if (direction === 'reverse') {
+      console.log('reverse');
       console.log(
-        "dashoffset >",
-        percentV * 2 * (dasharrayV / 100 - multiplyV)
+        'dashoffset >',
+        percentV * 2 * (dasharrayV / 100 - multiplyV),
       );
-      return (
-        dasharrayV + ((100 - percentV) * (dasharrayV / 100 - multiplyV)) / 2
-      );
+      return dasharrayV - percentV * (dasharrayV / 100 - multiplyV);
     }
     // right
-    console.log("forward");
-    return dasharrayV - (percentV * (dasharrayV / 100 - multiplyV)) / 2;
+    console.log(
+      'dashoffset >',
+      dasharrayV - percentV * (dasharrayV / 100 - multiplyV),
+    );
+    return dasharrayV - percentV * (dasharrayV / 100 - multiplyV);
   };
 
   const css = `
@@ -170,12 +171,12 @@ const MovingPath = ({ pathOption, percent }) => {
       </defs>
       {/* transform 초기 위치 지정, scale 배율지정 */}
       {/* 바깥 테두리를 위한 path  파란색*/}
-      <g
+      {/* <g
         id={`${id}-border-path-group`}
         transform={`translate(${translate_value}) scale(${scale_value})`}
       >
         <path id={`${id}-border-path`} d={path_d_value} />
-      </g>
+      </g> */}
       <g
         id={`${id}-main-path-group`}
         transform={`translate(${translate_value}) scale(${scale_value})`}
