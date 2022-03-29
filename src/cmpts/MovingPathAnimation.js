@@ -65,6 +65,12 @@ const MovingPathAnimation = ({ pathOption, percent }) => {
     return dasharrayV - percentV * (dasharrayV / 100 - multiplyV);
   };
 
+  // @READ ME
+  //  svg 태그는 id속성을 이용해 조작해야합니다.
+  //  mask  속성이나 기타 다른 속성은 클래스로 지정 할수 없습니다.
+  // 또한, styled component로 속성을 입히게 되면 제대로 반영이안되는 문제가 발생합니다.
+  //  문자열을 style 태그 내에 전달하여 style을 선언해야합니다.
+
   const css = `
   #${id}-cover-path-line-ani {
     opacity: 1;
@@ -75,7 +81,6 @@ const MovingPathAnimation = ({ pathOption, percent }) => {
     stroke-dashoffset: ${calCurrentDashoffset()};
     fill: #fff;
   }
-
   #${id}-main-path-none-ani{
     fill: ${main_path_fill_value};
     stroke: ${main_path_stroke_color_value};
@@ -91,8 +96,8 @@ const MovingPathAnimation = ({ pathOption, percent }) => {
     stroke-width: ${main_path_stroke_width_value};
     stroke-dasharray: ${path_stroke_dasharray_value / 125};
     stroke-dashoffset: ${calCurrentDashoffset()};
-    stroke: #940c0c;
-    animation : pathmove 15s linear infinite;
+    stroke: #971717;
+    animation : pathmove ${percent}s linear infinite;
     opacity : 0.75;
     transition: background-color 1s, transform 1s;
   }
@@ -105,14 +110,14 @@ const MovingPathAnimation = ({ pathOption, percent }) => {
     }
   }
 `;
-  //   console.log(css);
+
   return (
     <>
       <style>{css}</style>
       <defs>
-        {/* mask 속성은 url(_) 형식으로 지정할때 id가 아니면 지정이 되지 않는다. */}
+        {/* mask 속성은 url(_) 형식으로 지정할때 id가 아니면 지정이 되지 않습니다.*/}
         <mask id={`${id}-path-cover-mask-ani`}>
-          {/* 내부 percentage 에 따라 변화하는 path를 덮어주는 외부 영역 지정 path */}
+          {/* 내부 percentage 에 따라 변화하는 path를 덮어주는 외부 영역 지정 path입니다*/}
           <path id={`${id}-cover-path-line-ani`} d={path_d_value} />
         </mask>
       </defs>
@@ -121,8 +126,9 @@ const MovingPathAnimation = ({ pathOption, percent }) => {
         transform={`translate(${translate_value}) scale(${scale_value})`}
         mask={`url(#${id}-path-cover-mask-ani)`}
       >
-        {/* 퍼센트에 따라 움직이는 path 노란색 */}
+        {/* 애니메이션 path  입니다. 전체 path를 따라갑니다. */}
         <path id={`${id}-main-path-ani`} d={path_d_value} />
+        {/* 현재 퍼센트를 제외하고 잔여 퍼센트 영역을 덮는 reverse path */}
         <path id={`${id}-main-path-none-ani`} d={path_d_value} />
       </g>
     </>
