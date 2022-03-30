@@ -3,18 +3,11 @@ import styled from 'styled-components';
 import SvgMap from '../cmpts/SvgMap';
 
 const MainSector = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: gray;
   p {
     color: white;
-  }
-  #hi {
-    stroke: yellow;
-    stroke-width: 7;
-    stroke-dasharray: 342;
-    fill: transparent;
-    opacity: 1;
   }
 `;
 
@@ -24,7 +17,6 @@ const MapSector = styled.div`
   height: 360px;
   margin-top: 100px;
   margin-left: 5px;
-  background-color: white;
   background-image: url('/map.png');
 `;
 

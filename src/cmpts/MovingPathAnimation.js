@@ -31,12 +31,6 @@ const MovingPathAnimation = ({ pathOption, percent }) => {
     main_path_stroke_color_value,
     // 메인 패스의 채워지지 않은 선의 색상값
     main_path_fill_value,
-    // 테두리 패스의 두께
-    border_path_stroke_width_value,
-    // 테두리 패스의 채워진 선의 색상값
-    border_path_stroke_color_value,
-    // 테두리 패스의 채워지지 않은 선의 색상값
-    border_path_stroke_fill_value,
   } = pathOption;
 
   id = 'hi';
@@ -126,7 +120,7 @@ const MovingPathAnimation = ({ pathOption, percent }) => {
         transform={`translate(${translate_value}) scale(${scale_value})`}
         mask={`url(#${id}-path-cover-mask-ani)`}
       >
-        {/* 애니메이션 path  입니다. 전체 path를 따라갑니다. */}
+        {/* 애니메이션 path 입니다. 전체 path의 총길이를 따라갑니다. */}
         <path id={`${id}-main-path-ani`} d={path_d_value} />
         {/* 현재 퍼센트를 제외하고 잔여 퍼센트 영역을 덮는 reverse path */}
         <path id={`${id}-main-path-none-ani`} d={path_d_value} />

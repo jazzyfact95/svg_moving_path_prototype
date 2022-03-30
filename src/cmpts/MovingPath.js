@@ -1,41 +1,6 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
-// const MovingPathContainer = styled.div`
-//   /* width: 100%;
-//   height: 100%;
-//   box-sizing: border-box; */
-//   .main-path {
-//     /* 빈 공간의 색 */
-//     fill: ${(props) => props.main_path_fill_value};
-//     /* 현재 굴진량 표시 색 */
-//     stroke: ${(props) => props.main_path_stroke_color_value};
-//     /* 총 길이 */
-//     stroke-width: ${(props) => props.main_path_stroke_width_value};
-//     /* stroke-dasharray 는 path의 총 길이로 지정한다 */
-//     stroke-dasharray: ${(props) => props.path_stroke_dasharray_value};
-//     /* stroke-dashoffset 속성 값 만큼 변화한다 */
-//     stroke-dashoffset: ${(props) =>
-//       props.path_stroke_dasharray_value -
-//         props.percent * props.path_stroke_dashoffset_multiply_value ?? 0};
-//   }
-//   .border-path {
-//     opacity: 1;
-//     fill: ${(props) => props.border_path_stroke_fill_value};
-//     stroke: ${(props) => props.border_path_stroke_color_value};
-//     stroke-width: ${(props) => props.border_path_stroke_width_value};
-//     stroke-dasharray: ${(props) => props.path_stroke_dasharray_value};
-//   }
-//   .cover-path-line {
-//     opacity: 1;
-//     stroke: #fff;
-//     /* stroke-width: ${(props) => props.path_stroke_dasharray_value}; */
-//     stroke-width: 1;
-//     stroke-dasharray: ${(props) => props.path_stroke_dasharray_value};
-//     fill: #fff;
-//   }
-// `;
-
 // * 만약 굴곡으로 인하여 정상적인 퍼센테이지 적용이 되지 않을 경우
 //  아래와 같이 조율하여 사용하면 된다.
 // const getDashoffset = (percent) => {
@@ -75,49 +40,33 @@ const MovingPath = ({ pathOption, percent }) => {
 
   // console.log(pathOption);
   const {
-    // id 식별값
     id,
-    // 굴진 방향
+    // id 식별값
     direction,
-    // path 태그의 속성 d 값
+    // 굴진 방향
     path_d_value,
-    // 좌표 초기 값
+    // path 태그의 속성 d 값
     translate_value,
-    // 배율 값
+    // 좌표 값 이동
     scale_value,
-    //
-    // 패스의 총 길이
+    // 배율 값
     path_stroke_dasharray_value,
-    // 패스의 비율 가중치
+    // 패스의 총 길이
     path_stroke_dashoffset_multiply_value,
-    // 메인 패스의 두께
+    // 패스의 비율 가중치
     main_path_stroke_width_value,
-    // 메인 패스의 채워진 선의 색상값
+    // 메인 패스의 두께
     main_path_stroke_color_value,
-    // 메인 패스의 채워지지 않은 선의 색상값
+    // 메인 패스의 채워진 선의 색상값
     main_path_fill_value,
-    // 테두리 패스의 두께
-    border_path_stroke_width_value,
-    // 테두리 패스의 채워진 선의 색상값
-    border_path_stroke_color_value,
-    // 테두리 패스의 채워지지 않은 선의 색상값
-    border_path_stroke_fill_value,
+    // 메인 패스의 채워지지 않은 선의 색상값
   } = pathOption;
-  // 설계 : 같은 SVG PATH 3개를 사용한다.,
-  // 1개는 mask, 즉 껍데기를 덮어 씌우기 위해 사용하고,
-  // 나머지 2개는 라인을 그리기 위해 사용한다.
-  // main-path 메인 라인
-  // border-path 메인 라인의 테두리 부분
-  //   console.log(pathOption);
-  //   console.log("props percent >", percent);
+
   const calCurrentDashoffset = () => {
     const dasharrayV = path_stroke_dasharray_value;
     const percentV = percent;
     const multiplyV = path_stroke_dashoffset_multiply_value;
-    // console.log(dasharrayV);
-    // console.log(percentV);
-    // console.log(multiplyV);
-    // console.log(dasharrayV - percentV * multiplyV);
+
     if (direction === 'reverse') {
       console.log('reverse');
       console.log(
@@ -142,13 +91,6 @@ const MovingPath = ({ pathOption, percent }) => {
     stroke-dasharray: ${path_stroke_dasharray_value};
     stroke-dashoffset: ${calCurrentDashoffset()};
   }
-  #${id}-border-path {
-    opacity: 1;
-    fill: ${border_path_stroke_fill_value};
-    stroke: ${border_path_stroke_color_value};
-    stroke-width: ${border_path_stroke_width_value};
-    stroke-dasharray: ${path_stroke_dasharray_value};
-  }
   #${id}-cover-path-line {
     opacity: 1;
     stroke: #fff;
@@ -158,7 +100,7 @@ const MovingPath = ({ pathOption, percent }) => {
     fill: #fff;
   }
 `;
-  //   console.log(css);
+
   return (
     <>
       <style>{css}</style>
@@ -170,13 +112,6 @@ const MovingPath = ({ pathOption, percent }) => {
         </mask>
       </defs>
       {/* transform 초기 위치 지정, scale 배율지정 */}
-      {/* 바깥 테두리를 위한 path  파란색*/}
-      {/* <g
-        id={`${id}-border-path-group`}
-        transform={`translate(${translate_value}) scale(${scale_value})`}
-      >
-        <path id={`${id}-border-path`} d={path_d_value} />
-      </g> */}
       <g
         id={`${id}-main-path-group`}
         transform={`translate(${translate_value}) scale(${scale_value})`}
