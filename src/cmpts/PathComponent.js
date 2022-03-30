@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
-import styled, { css } from 'styled-components';
+import React, { useEffect } from 'react';
 
 // * 만약 굴곡으로 인하여 정상적인 퍼센테이지 적용이 되지 않을 경우
 //  아래와 같이 조율하여 사용하면 된다.
@@ -29,16 +28,7 @@ import styled, { css } from 'styled-components';
 //   return result;
 // };
 
-const MovingPath = ({ pathOption, percent }) => {
-  useEffect(() => {
-    // svg path의 총 길이를 알아내기
-    console.log(
-      `${id} path 총 길이 >`,
-      document.getElementById(`${id}-main-path`).getTotalLength(),
-    );
-  });
-
-  // console.log(pathOption);
+const Path = ({ pathOption, percent }) => {
   const {
     id,
     // id 식별값
@@ -124,4 +114,4 @@ const MovingPath = ({ pathOption, percent }) => {
   );
 };
 
-export default React.memo(MovingPath);
+export default React.memo(Path);

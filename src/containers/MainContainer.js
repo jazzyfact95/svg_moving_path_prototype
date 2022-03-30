@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import SvgMap from '../cmpts/SvgMap';
+import SvgContainer from '../cmpts/SvgContainer';
 
 const MainSector = styled.div`
   width: 100%;
@@ -54,7 +54,7 @@ const MainContainer = () => {
   return (
     <MainSector>
       <MapSector>
-        <SvgMap percent1={percent1} percent2={percent2} />
+        <SvgContainer percent1={percent1} percent2={percent2} />
       </MapSector>
       <hr />
       <p>

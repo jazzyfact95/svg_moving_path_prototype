@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
-const MovingPathAnimation = ({ pathOption, percent }) => {
+const PathAnimation = ({ pathOption, percent }) => {
   useEffect(() => {
     // svg path의 총 길이를 알아내기
     // console.log(
@@ -71,7 +71,7 @@ const MovingPathAnimation = ({ pathOption, percent }) => {
     stroke: #fff;
     stroke-width: ${path_stroke_dasharray_value};
     stroke-width: 1;
-    stroke-dasharray: ${calCurrentDashoffset()};
+    stroke-dasharray: ${path_stroke_dasharray_value};
     stroke-dashoffset: ${calCurrentDashoffset()};
     fill: #fff;
   }
@@ -129,4 +129,4 @@ const MovingPathAnimation = ({ pathOption, percent }) => {
   );
 };
 
-export default React.memo(MovingPathAnimation);
+export default React.memo(PathAnimation);
