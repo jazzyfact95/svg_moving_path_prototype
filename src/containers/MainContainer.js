@@ -22,12 +22,11 @@ const MapSector = styled.div`
 
 const MainContainer = () => {
   const [Values, setValues] = useState({
-    maxLength: 100,
+    planLength: 100,
     currentLength: 0,
   });
 
-  const [percent1, setPercent1] = useState(0);
-  const [percent2, setPercent2] = useState(0);
+  const [percent, setPercent] = useState(0);
 
   const onChange = (e) => {
     const name = e.target.name;
@@ -39,30 +38,27 @@ const MainContainer = () => {
   };
 
   useEffect(() => {
-    const CL = parseInt(Values.currentLength1);
-    const ML = parseInt(Values.maxLength1);
+    const CL = parseInt(Values.currentLength);
+    const ML = parseInt(Values.planLength);
     const Result = Math.ceil((CL / ML) * 100);
-    setPercent1(Result);
-  }, [Values]);
-  useEffect(() => {
-    const CL = parseInt(Values.currentLength2);
-    const ML = parseInt(Values.maxLength2);
-    const Result = Math.ceil((CL / ML) * 100);
-    setPercent2(Result);
+    setPercent(Result);
   }, [Values]);
 
   return (
     <MainSector>
       <MapSector>
-        <SvgContainer percent1={percent1} percent2={percent2} />
+        <SvgContainer
+          currentLength={Values.currentLength}
+          planLength={Values.planLength}
+        />
       </MapSector>
       <hr />
       <p>
         최대 굴진 거리 :
         <input
           onChange={onChange}
-          name="maxLength2"
-          value={Values.maxLength2 >= 0 ? Values.maxLength2 : 0}
+          name="planLength"
+          value={Values.planLength >= 0 ? Values.planLength : 0}
         />
         m
       </p>
@@ -70,12 +66,12 @@ const MainContainer = () => {
         현재 굴진 거리 :
         <input
           onChange={onChange}
-          name="currentLength2"
-          value={Values.currentLength2 >= 0 ? Values.currentLength2 : 0}
+          name="currentLength"
+          value={Values.currentLength >= 0 ? Values.currentLength : 0}
         />
         m
       </p>
-      <p>굴진 퍼센트 : {`${percent2}`} %</p>
+      <p>굴진 퍼센트 : {`${percent}`} %</p>
     </MainSector>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const Path = ({ pathOption, percent }) => {
+const Path = ({ pathOption, currentLength = 0, planLength = 1 }) => {
   const {
     // cover path vaule
     id,
@@ -14,40 +14,58 @@ const Path = ({ pathOption, percent }) => {
     scale_value,
     // 배율 값 (width, height)
     path_stroke_dasharray_value,
-    // 패스의 총 길이
+    // path의 총 길이
     path_stroke_dashoffset_multiply_value,
-    // 패스의 비율 가중치
+    // path의 비율 가중치
 
     // cover path vaule
     cover_path_fill_value,
 
     // svg path values
     main_path_stroke_width_value,
-    // 메인 패스의 두께
+    // path의 두께
     main_path_stroke_color_value,
-    // 메인 패스의 채워진 선의 색상값
+    // path선의 색상값
     main_path_fill_value,
-    // 메인 패스의 채워지지 않은 선의 색상값
+    // path의 채워지지 않은 선의 색상값
     main_path_opacity,
+    // path의 투명도
 
     // ani path values
     ani_path_stroke_dasharray_split_value,
+    // 애니메이션 path 의 stroke_dasharray 속성을 나눌 값을.
+    // 값을 크게 나눌수록 잘게 쪼개짐.
     ani_path_stroke_width_value,
+    // path의 두께
     ani_path_stroke_color_value,
+    // path선의 색상값
     ani_path_fill_value,
+    // path의 채워지지 않은 선의 색상값
     ani_path_opacity,
+    // path의 투명도
 
     // animation values
     animation_speed,
+    // keyframe의 속도를 지정.
     animation_timing_function,
+    // keyframe 의 재생 방식.
     animation_iteration_count,
+    // keyframe 의 반복 횟수.
 
     // reverse path values
     reverse_path_stroke_width_value,
+    // path의 두께
     reverse_path_stroke_color_value,
+    // path선의 색상값
     reverse_path_fill_value,
+    // path의 채워지지 않은 선의 색상값
     reverse_path_opacity,
+    // path의 투명도
   } = pathOption;
+
+  const percent = Math.ceil(
+    (parseInt(currentLength, 10) / parseInt(planLength, 10)) * 100,
+  );
 
   const [currentStyle, setCurrentStyle] = useState('');
 

@@ -15,7 +15,7 @@ const SvgArea = styled.div`
   }
 `;
 
-const SvgContainer = ({ percent1, percent2 }) => {
+const SvgContainer = ({ currentLength, planLength }) => {
   // ======================================
 
   // @READ ME
@@ -74,22 +74,42 @@ const SvgContainer = ({ percent1, percent2 }) => {
     main_path_opacity: 1,
     // 메인 path의 투명도를 지정합니다.
 
-    // [animation values]
+    // [ani path values]
     ani_path_stroke_dasharray_split_value: 100,
     // 애니메이션 path 의 stroke_dasharray 속성을 나눌 값을 정해줍니다.
     // 값을 크게 나눌수록 잘게 쪼개집니다.
     ani_path_stroke_width_value: 1,
-    ani_path_stroke_color_value: '#971717',
+    // 애니메이션 path의 두께를 지정합니다.
+    // main path의 두께와 동일하게 설정하시면 됩니다.
+    ani_path_stroke_color_value: '#fff',
+    // 애니메이션 path의 색상을 지정합니다.
     ani_path_fill_value: 'none',
+    // 애니메이션 path의 채워지지 않은 선의 색상값을 지정합니다.
+    // "none" 이면 색상을 없앱니다. transparent 속성은 적용 불가능합니다.
     ani_path_opacity: 1,
-    ani_path_animation_type: 'linear',
-    ani_path_animation_speed: 1,
+    // 애니메이션 path의 투명도를 지정합니다.
+
+    // [animation values]
+    animation_timing_function: 'linear',
+    // keyframe 의 재생 방식을 설정합니다.
+    // linear / ease-in ....
+    animation_iteration_count: 'infinite',
+    // keyframe 의 반복 횟수를 지정합니다.
+    // infinite의 경우 무한입니다.
+    animation_speed: 1.25,
+    // keyframe의 속도를 지정합니다.
+    // 값이 높을 수록 빨라집니다. 1 이하의 값을 지정하면 느려집니다.
 
     // [reverse path values]
     reverse_path_stroke_width_value: 1,
+    // 잔여 굴진영역의 stroke 두께를 지정합니다.
+    // main path, ani path 보다 + 1 해주시면 ani path가 영역을 침범하지 않습니다.
     reverse_path_stroke_color_value: '#fff',
+    // 잔여 굴진영역의 stroke 색상을 지정합니다.
     reverse_path_fill_value: '#fff',
+    // 잔여 굴진영역의 채워지지 않은 선의 색상값을 지정합니다.
     reverse_path_opacity: 1,
+    // 잔여 굴진영역의 투명도를 지정합니다.
   };
   // ======================================
 
@@ -98,7 +118,7 @@ const SvgContainer = ({ percent1, percent2 }) => {
       // svg path common values
       id: 'loc1-station101',
       path_d_value: `M2.59,108.2c2.85,4.89,141.15,69.24,155.41,73.52,14.26,4.28,62.02,19.25,71.29,22.1s119.05,60.59,190.34,71.29c71.29,10.69,163.25-17.11,189.2-27.8,25.95-10.69,172.23-102.65,172.23-102.65L1003.15,2.53`,
-      direction: 'left',
+      direction: 'right',
       translate_value: '135, 40',
       scale_value: '1, 1',
       path_stroke_dasharray_value: 1107,
@@ -110,11 +130,6 @@ const SvgContainer = ({ percent1, percent2 }) => {
       main_path_stroke_color_value: 'red',
       main_path_fill_value: 'none',
       main_path_opacity: 1,
-      // reverse path values
-      reverse_path_stroke_width_value: 9,
-      reverse_path_stroke_color_value: 'black',
-      reverse_path_fill_value: 'none',
-      reverse_path_opacity: 1,
       // ani path values
       ani_path_stroke_dasharray_split_value: 120,
       ani_path_stroke_width_value: 8,
@@ -125,6 +140,11 @@ const SvgContainer = ({ percent1, percent2 }) => {
       animation_timing_function: 'linear',
       animation_iteration_count: 'infinite',
       animation_speed: 1.25,
+      // reverse path values
+      reverse_path_stroke_width_value: 9,
+      reverse_path_stroke_color_value: '#000',
+      reverse_path_fill_value: 'none',
+      reverse_path_opacity: 1,
     },
   ];
 
@@ -142,8 +162,11 @@ const SvgContainer = ({ percent1, percent2 }) => {
     <SvgArea>
       {/* 최상위 SVG 태그, viewBox 지정 */}
       <svg className="map-svg" viewBox="0 0 1384 360">
-        <PathComponent pathOption={movingPathOptions[0]} percent={percent2} />
-        {/* <PathAnimation pathOption={movingPathOptions[1]} percent={percent2} /> */}
+        <PathComponent
+          pathOption={movingPathOptions[0]}
+          currentLength={currentLength}
+          planLength={planLength}
+        />
       </svg>
     </SvgArea>
   );
