@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+주의 : 색상값 전달할 때 #123444 혹은 red 같은 형식으로 넣어야합니다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+옵션 객체 설명
 
-## Available Scripts
+const pathObjExample = {
 
-In the project directory, you can run:
+    // [svg common values]
+    id: 'loc1-station101',
+    // 각 컴포넌트에 svg 요소들을 구분할 수 있는 공통 id 값을 지정합니다.
+    path_d_value: `M182.4, ... .4,595.3z`,
+    // svg path의 d="" 속성값을 대입합니다.
+    direction: 'left || right',
+    // path의 진행방향 "left" || "right", 미 입력시 left 가 default 값입니다.
+    translate_value: 'x,y',
+    // svg 태그의 left, top 값을 이동합니다.
+    scale_value: 'width, height',
+    // svg의 배율을 결정합니다. ex ) 2, 2 가로 세로 2배
+    path_stroke_dasharray_value: 1,
+    // document.getElementById(`${id}-main-path`).getTotalLength() 을 이용해 총 길이값을 추출합니다.
+    path_stroke_dashoffset_multiply_value: 1,
+    // svg path의 dashoffset 값은 현재의 퍼센트 만큼 path를 움직이는 효과를 냅니다.
+    // 그런데 svg path의 곡률이나, svg에 어떤 예상하지 못한 문제점이 있을때
+    // dashoffset 값에 path_stroke_dashoffset_multiply_value 가변적인 값을 곱해 가감/가중 치를 부여해 해결합니다.
 
-### `yarn start`
+    // [cover values]
+    cover_path_fill_value: '#fff',
+    // 하위 path 들의 라인을 지정하는 mask 영역의 path 의 fill 속성입니다.
+    // 전체 path에 대한 투명도를 관장합니다.
+    // 이 속성은 하얀색에 가까워 질 수록 불투명해지고
+    //  검정색에 가까워 질 수록 투명해집니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    // [main path values]
+    main_path_stroke_width_value: 1,
+    // 메인 path의 두께를 지정합니다.
+    main_path_stroke_color_value: '#fff',
+    // 메인 path의 색상을 지정합니다.
+    main_path_fill_value: 'none',
+    // 메인 path의 채워지지 않은 선의 색상값입니다. "none" 이면 색상을 없앱니다.
+    // transparent 속성은 적용 불가능합니다.
+    main_path_opacity: 1,
+    // 메인 path의 투명도를 지정합니다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+    // [ani path values]
+    ani_path_use: true,
+    // 애니메이션 path의 표출 유무를 설정합니다. (true/false)
+    ani_path_stroke_dasharray_split_value: 100,
+    // 애니메이션 path 의 stroke_dasharray 속성을 나눌 값을 정해줍니다.
+    // 값을 크게 나눌수록 잘게 쪼개집니다.
+    ani_path_stroke_width_value: 1,
+    // 애니메이션 path의 두께를 지정합니다.
+    // main path의 두께와 동일하게 설정하시면 됩니다.
+    ani_path_stroke_color_value: '#fff',
+    // 애니메이션 path의 색상을 지정합니다.
+    ani_path_fill_value: 'none',
+    // 애니메이션 path의 채워지지 않은 선의 색상값을 지정합니다.
+    // "none" 이면 색상을 없앱니다. transparent 속성은 적용 불가능합니다.
+    ani_path_opacity: 1,
+    // 애니메이션 path의 투명도를 지정합니다.
 
-### `yarn test`
+    // [animation values]
+    animation_timing_function: 'linear',
+    // keyframe 의 재생 방식을 설정합니다.
+    // linear / ease-in ....
+    animation_iteration_count: 'infinite',
+    // keyframe 의 반복 횟수를 지정합니다.
+    // infinite의 경우 무한입니다.
+    animation_speed: 1.25,
+    // keyframe의 속도를 지정합니다.
+    // 값이 높을 수록 빨라집니다. 1 이하의 값을 지정하면 느려집니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    // [reverse path values]
+    reverse_path_use: true,
+    // 잔여 굴진영역의 path 의 표출 유무를 설정합니다. (true/false)
+    reverse_path_stroke_width_value: 1,
+    // 잔여 굴진영역의 stroke 두께를 지정합니다.
+    // main path, ani path 보다 + 1 해주시면 ani path가 영역을 침범하지 않습니다.
+    reverse_path_stroke_color_value: '#fff',
+    // 잔여 굴진영역의 stroke 색상을 지정합니다.
+    reverse_path_fill_value: '#fff',
+    // 잔여 굴진영역의 채워지지 않은 선의 색상값을 지정합니다.
+    reverse_path_opacity: 1,
+    // 잔여 굴진영역의 투명도를 지정합니다.
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+};
