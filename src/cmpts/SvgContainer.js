@@ -29,11 +29,11 @@ const SvgContainer = ({ currentLength, planLength }) => {
   // 렌더링 이후에 값을 불러올 수 있으므로 동기를 맞춰주셔야 합니다.
 
   // useEffect(() => {
-  // svg path의 총 길이를 알아내기
-  // console.log(
-  //   `${id} path 총 길이 >`,
-  //   document.getElementById(`${id}-main-path`).getTotalLength(),
-  // );
+  //   // svg path의 총 길이를 알아내기
+  //   console.log(
+  //     `${id} path 총 길이 >`,
+  //     document.getElementById(`${id}-main-path`).getTotalLength(),
+  //   );
   // });
 
   // 색상값 전달할 때 #123444 혹은 red 같은 형식으로 넣어야합니다.
@@ -75,6 +75,8 @@ const SvgContainer = ({ currentLength, planLength }) => {
     // 메인 path의 투명도를 지정합니다.
 
     // [ani path values]
+    ani_path_use: true,
+    // 애니메이션 path의 표출 유무를 설정합니다. (true/false)
     ani_path_stroke_dasharray_split_value: 100,
     // 애니메이션 path 의 stroke_dasharray 속성을 나눌 값을 정해줍니다.
     // 값을 크게 나눌수록 잘게 쪼개집니다.
@@ -101,6 +103,8 @@ const SvgContainer = ({ currentLength, planLength }) => {
     // 값이 높을 수록 빨라집니다. 1 이하의 값을 지정하면 느려집니다.
 
     // [reverse path values]
+    reverse_path_use: true,
+    // 잔여 굴진영역의 path 의 표출 유무를 설정합니다. (true/false)
     reverse_path_stroke_width_value: 1,
     // 잔여 굴진영역의 stroke 두께를 지정합니다.
     // main path, ani path 보다 + 1 해주시면 ani path가 영역을 침범하지 않습니다.
@@ -131,7 +135,8 @@ const SvgContainer = ({ currentLength, planLength }) => {
       main_path_fill_value: 'none',
       main_path_opacity: 1,
       // ani path values
-      ani_path_stroke_dasharray_split_value: 120,
+      ani_path_use: true,
+      ani_path_stroke_dasharray_split_value: 125,
       ani_path_stroke_width_value: 8,
       ani_path_stroke_color_value: '#971717',
       ani_path_fill_value: 'none',
@@ -141,6 +146,7 @@ const SvgContainer = ({ currentLength, planLength }) => {
       animation_iteration_count: 'infinite',
       animation_speed: 1.25,
       // reverse path values
+      reverse_path_use: true,
       reverse_path_stroke_width_value: 9,
       reverse_path_stroke_color_value: '#000',
       reverse_path_fill_value: 'none',
@@ -149,14 +155,6 @@ const SvgContainer = ({ currentLength, planLength }) => {
   ];
 
   // ==========================================================
-
-  useEffect(() => {
-    // svg path의 총 길이를 알아내기
-    // console.log(
-    //   `${id} path 총 길이 >`,
-    //   document.getElementById(`${id}-main-path`).getTotalLength(),
-    // );
-  });
 
   return (
     <SvgArea>
